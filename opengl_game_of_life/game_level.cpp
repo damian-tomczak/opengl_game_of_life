@@ -22,51 +22,32 @@ void GameLevel::Load(unsigned int levelWidth, unsigned int levelHeight)
 
 void GameLevel::Draw(SpriteRenderer& renderer)
 {
-    for (GameObject& tile : this->Cells)
+    for (Cell& tile : this->Cells)
             tile.Draw(renderer);
 }
 
-bool GameLevel::IsCompleted()
-{
-    for (GameObject& tile : this->Cells)
-        return true;
-}
-
-void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight)
+void GameLevel::init(std::vector<std::vector<unsigned int>> cellData, unsigned int levelWidth, unsigned int levelHeight)
 {
 
-    unsigned int height = tileData.size();
-    unsigned int width = tileData[0].size(); 
+    unsigned int height = cellData.size();
+    unsigned int width = cellData[0].size(); 
     float unit_width = levelWidth / static_cast<float>(width), unit_height = levelHeight / height;
 	
     for (unsigned int y = 0; y < height; ++y)
     {
         for (unsigned int x = 0; x < width; ++x)
         {
+            glm::vec2 pos(unit_width * x, unit_height * y);
+            glm::vec2 size(unit_width, unit_height);
+            bool isLive = false;
 
-            if (tileData[y][x] == 1) 
-            {
-                glm::vec2 pos(unit_width * x, unit_height * y);
-                glm::vec2 size(unit_width, unit_height);
-                Cell obj(pos, size, true, 0);
-                this->Cells.push_back(obj);
-            }
-            else if (tileData[y][x] > 1)
-            {
-                glm::vec3 color = glm::vec3(1.0f); 
-                if (tileData[y][x] == 2)
-                    color = glm::vec3(0.2f, 0.6f, 1.0f);
-                else if (tileData[y][x] == 3)
-                    color = glm::vec3(0.0f, 0.7f, 0.0f);
-                else if (tileData[y][x] == 4)
-                    color = glm::vec3(0.8f, 0.8f, 0.4f);
-                else if (tileData[y][x] == 5)
-                    color = glm::vec3(1.0f, 0.5f, 0.0f);
+            if (cellData[y][x] == 1) 
+                isLive = true;
+            else
+                isLive = false;
 
-                glm::vec2 pos(unit_width * x, unit_height * y);
-                glm::vec2 size(unit_width, unit_height);
-                this->Cells.push_back(Cell(pos, size, true, 0));
-            }
+            Cell obj(pos, size, isLive, 0);
+            this->Cells.push_back(obj);
         }
     }
 }

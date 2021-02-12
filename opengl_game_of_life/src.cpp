@@ -42,7 +42,8 @@ int main(int argc, char* argv[])
 
 	float deltaTime = 0.f;
 	float lastFrame = 0.0f;
-	game.Render();
+
+	glClearColor(0.f, 0.f, 0.f, 1.0f);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -51,18 +52,18 @@ int main(int argc, char* argv[])
 
 		glfwPollEvents();
 		game.ProcessInput(deltaTime);
-		
+
 		if (deltaTime >= 1.f)
 		{
 			lastFrame = currentFrame;
 			game.Update(deltaTime);
-
-			glClearColor(0.f, 0.f, 0.f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
 		}
 
-		glfwSwapBuffers(window);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		game.Render();
+
+		glfwSwapBuffers(window);
 	}
 
 	glfwTerminate();

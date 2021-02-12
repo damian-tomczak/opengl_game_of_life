@@ -24,9 +24,7 @@ public:
     void Load(unsigned int levelWidth, unsigned int levelHeight);
 
     void Draw(SpriteRenderer& renderer);
-
-    bool IsCompleted();
 private:
 
-    void init(std::vector<std::vector<unsigned int>> tileData, unsigned int levelWidth, unsigned int levelHeight);
+    void init(std::vector<std::vector<unsigned int>> cellData, unsigned int levelWidth, unsigned int levelHeight);
 };

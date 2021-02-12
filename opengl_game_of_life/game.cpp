@@ -45,5 +45,6 @@ void Game::Render()
     {
         this->Level.Draw(*Renderer);
     }
+    
 }
 

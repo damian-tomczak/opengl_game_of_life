@@ -10,10 +10,9 @@ class GameObject
 public:
     glm::vec2   Position, Size;
     glm::vec3   Color;
-    float       Rotation;
 
     GameObject();
-    GameObject(glm::vec2 pos, glm::vec2 size);
+    GameObject(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
 
     virtual void Draw(SpriteRenderer& renderer);
 };
