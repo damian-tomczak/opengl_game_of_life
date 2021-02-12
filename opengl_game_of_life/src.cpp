@@ -9,7 +9,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 const unsigned int SCREEN_WIDTH = 800;
-const unsigned int SCREEN_HEIGHT = 600;
+const unsigned int SCREEN_HEIGHT = 800;
 
 Game game(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -19,10 +19,6 @@ int main(int argc, char* argv[])
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif // __APPLE
 
 	glfwWindowHint(GLFW_RESIZABLE, false);
 
@@ -42,25 +38,31 @@ int main(int argc, char* argv[])
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	game.Init();
+
 	float deltaTime = 0.f;
 	float lastFrame = 0.0f;
+	game.Render();
 
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
 
 		glfwPollEvents();
-
 		game.ProcessInput(deltaTime);
+		
+		if (deltaTime >= 1.f)
+		{
+			lastFrame = currentFrame;
+			game.Update(deltaTime);
 
-		game.Update(deltaTime);
-
-		glClearColor(0.f, 0.f, 0.f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+			glClearColor(0.f, 0.f, 0.f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+		}
 
 		glfwSwapBuffers(window);
+		game.Render();
 	}
 
 	glfwTerminate();
@@ -82,8 +84,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// heigt will be significantly larger than specified on retina displays
 	glViewport(0,0, width, height);
 }
 
