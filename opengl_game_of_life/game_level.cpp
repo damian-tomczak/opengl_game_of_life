@@ -7,17 +7,34 @@ void GameLevel::Load(unsigned int levelWidth, unsigned int levelHeight)
 
     this->Cells.clear();
 
-    for (int i = 0; i < levelHeight; i++)
+    for (unsigned int i = 0; i < levelHeight; i++)
     {
         world.push_back(std::vector<unsigned int>());
-        for (int j = 0; j < levelWidth; j++)
+        for (unsigned int j = 0; j < levelWidth; j++)
         {
-            world[i].push_back(rand() % 2 + 0);
+            unsigned int tmp;
+            if (rand() % 11 + 0 == 3)
+                tmp = 1;
+            else
+                tmp = 0;
+
+            world[i].push_back(tmp);
         }
     }
     
     if (world.size() > 0)
         this->init(world, levelWidth, levelHeight);
+}
+
+void GameLevel::Refresh()
+{
+    for (unsigned int i = 0; i < world.size(); i++)
+    {
+        for (unsigned int j = 0; j < world[0].size(); j++)
+        {
+
+        }
+    }
 }
 
 void GameLevel::Draw(SpriteRenderer& renderer)

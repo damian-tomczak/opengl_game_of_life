@@ -32,7 +32,7 @@ void Game::Init()
 
 void Game::Update(float dt)
 {
-
+    this->Level.Refresh();
 }
 
 void Game::ProcessInput(float dt)

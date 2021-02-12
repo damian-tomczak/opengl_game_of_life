@@ -23,6 +23,8 @@ public:
 
     void Load(unsigned int levelWidth, unsigned int levelHeight);
 
+    void Refresh();
+
     void Draw(SpriteRenderer& renderer);
 private:
 
