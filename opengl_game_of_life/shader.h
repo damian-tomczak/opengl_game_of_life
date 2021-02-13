@@ -11,7 +11,7 @@ class Shader
 public:
 	unsigned int ID;
 	Shader() {}
-	// sets the current shader as active
+
 	Shader& Use();
 	void Compile (const char* vertexSource, const char* fragmentSource, const char* geometrySource = nullptr);
 	void SetFloat(const char* name, float value, bool useShader = false);

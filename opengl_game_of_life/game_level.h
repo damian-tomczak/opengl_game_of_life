@@ -17,7 +17,7 @@ class GameLevel
 {
 public:
 
-    std::vector<Cell> Cells;
+    std::vector<std::vector<Cell>> Cells;
 
     GameLevel() { }
 

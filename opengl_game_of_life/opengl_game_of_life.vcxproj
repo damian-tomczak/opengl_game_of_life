@@ -158,10 +158,10 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="game_level.h" />
     <ClInclude Include="game_object.h" />
+    <ClInclude Include="game_of_life.h" />
     <ClInclude Include="resource_manager.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="sprite_renderer.h" />
-    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\sprite.frag" />

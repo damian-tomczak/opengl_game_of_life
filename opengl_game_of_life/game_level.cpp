@@ -1,5 +1,7 @@
 #include "game_level.h"
 
+#include "game_of_life.h"
+
 std::vector<std::vector<unsigned int>> world;
 
 void GameLevel::Load(unsigned int levelWidth, unsigned int levelHeight)
@@ -13,7 +15,7 @@ void GameLevel::Load(unsigned int levelWidth, unsigned int levelHeight)
         for (unsigned int j = 0; j < levelWidth; j++)
         {
             unsigned int tmp;
-            if (rand() % 11 + 0 == 3)
+            if (rand() % 6 + 0 == 3)
                 tmp = 1;
             else
                 tmp = 0;
@@ -28,18 +30,13 @@ void GameLevel::Load(unsigned int levelWidth, unsigned int levelHeight)
 
 void GameLevel::Refresh()
 {
-    for (unsigned int i = 0; i < world.size(); i++)
-    {
-        for (unsigned int j = 0; j < world[0].size(); j++)
-        {
-
-        }
-    }
+    GameOfLife(this->Cells);
 }
 
 void GameLevel::Draw(SpriteRenderer& renderer)
 {
-    for (Cell& tile : this->Cells)
+    for (auto& rows : this->Cells)
+        for(auto& tile: rows)
             tile.Draw(renderer);
 }
 
@@ -52,6 +49,7 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> cellData, unsigned i
 	
     for (unsigned int y = 0; y < height; ++y)
     {
+        this->Cells.push_back(std::vector<Cell>());
         for (unsigned int x = 0; x < width; ++x)
         {
             glm::vec2 pos(unit_width * x, unit_height * y);
@@ -64,7 +62,7 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> cellData, unsigned i
                 isLive = false;
 
             Cell obj(pos, size, isLive, 0);
-            this->Cells.push_back(obj);
+            this->Cells[y].push_back(obj);
         }
     }
 }

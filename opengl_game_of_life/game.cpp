@@ -18,15 +18,15 @@ void Game::Init()
     // load shaders
     ResourceManager::LoadShader("shaders/sprite.vert", "shaders/sprite.frag", nullptr, "sprite");
     // configure shaders
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->Width/8),
-        static_cast<float>(this->Height/8), 0.0f, -1.0f, 1.0f);
-    ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
-    ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->Width/2),
+        static_cast<float>(this->Height/2), 0.0f, -1.0f, 1.0f);
+
+    ResourceManager::GetShader("sprite").Use().SetMatrix4("projection", projection);
     // set render-specific controls
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 
     // load levels
-    GameLevel one; one.Load(this->Width/8, this->Height/8);
+    GameLevel one; one.Load(this->Width/2, this->Height/2);
     this->Level = one;
 }
 
