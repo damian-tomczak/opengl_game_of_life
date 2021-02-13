@@ -1,3 +1,5 @@
+// PRESS E TO RUN PROGRAM //
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 

@@ -3,7 +3,7 @@
 SpriteRenderer* Renderer;
 
 Game::Game(unsigned int width, unsigned int height)
-    : State(GAME_ACTIVE), Keys(), Width(width), Height(height)
+    : State(GAME_INACTIVE), Keys(), Width(width), Height(height)
 {
 
 }
@@ -37,6 +37,8 @@ void Game::Update(float dt)
 
 void Game::ProcessInput(float dt)
 {
+    if (this->Keys[GLFW_KEY_E])
+        this->State = GAME_ACTIVE;
 }
 
 void Game::Render()
